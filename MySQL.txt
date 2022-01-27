@@ -1,0 +1,5 @@
+Server: sql10.freemysqlhosting.net
+Name: sql10467211
+Username: sql10467211
+Password: QwDGRuN5zW
+Port number: 3306

@@ -1,0 +1,49 @@
+{% extends 'mydb01/base.html' %}
+{% block title %} Index Turotiales {% endblock %}
+{% block content %}
+    <div>
+        <div class="close">x</div>
+        {% if db.error %}
+            <div class="error">
+                <p>{{db.mensaje}}</p>
+            </div>
+        {% else %}
+            <div class="result">
+                <p>{{db.mensaje}}</p>
+            </div>
+        {% endif %}
+    </div>
+    <div>
+        {% if tutoriales %}
+            {% for tut in tutoriales %}
+                <p>{{tut.id}} {{tut.titulo}} {{tut.autor}} {{tut.creado}}</p> <br>
+            {% endfor %}
+        {% else %}
+            <p class="error">
+                No hay registros en la tabla
+            </p> 
+        {% endif %}
+    </div>
+    <p>{{h}}</p>
+
+{% endblock %}
+{% block form %}
+    <form class="registrar" method="POST">{% csrf_token %}
+        {{ formulario.as_p }}
+        <input type="submit" value="Registrar">
+    </form>
+    <div>
+        {% if click %}
+        <div class="close">x</div>
+            {% if enviado %}
+                <div class="result">
+                    <p>Se ingreso el registro correctamente</p>
+                </div>
+            {% else %}
+                <div class="error">
+                    <p>Error al ingresar</p>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+{% endblock %}

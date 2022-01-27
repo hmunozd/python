@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Dongle:wght@300&family=Sedgwick+Ave&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #1874CD;
+    color: #fff;
+    padding: 30px;
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family: 'Dongle', sans-serif;
+}
+
+p{
+    font-family: 'Sedgwick Ave', cursive;
+}
+
+main{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+aside{
+    border: 1px solid #fff;
+    padding: 5px;
+}
+aside .registrar{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+aside input,select{
+    border-radius: 40px;
+    padding: 5px;
+}
+.content{
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    background-color: aliceblue;
+    border: 1px solid #fff;
+    color: black;
+}
+.close{
+    float: right;
+    color: white;
+    padding: 1px 10px;
+}
+.close:hover{
+    color: black;
+    cursor: pointer;
+}
+.error{
+    background-color: red;
+    color: black;
+    padding: 10px;
+}
+
+.result{
+    background-color: green;
+    color: black;
+    padding: 10px;
+}
+footer{
+    background-color: blueviolet;
+    padding: 10px;
+}
