@@ -1,5 +1,5 @@
 {% extends 'mydb01/base.html' %}
-{% block title %} Index Turotiales {% endblock %}
+{% block title %} Index Autores {% endblock %}
 {% block content %}
     <div>
         <div class="close">x</div>
@@ -9,21 +9,21 @@
             </div>
         {% else %}
             <div class="result">
-                <p>Tutoriales obtenidos con Exito</p>
+                <p>{{db.mensaje}}</p>
             </div>
         {% endif %}
     </div>
     <div>
-        {% if tutoriales %}
+        {% if autores %}
             <div style="padding-inline: 5px;">
-                {% for tut in tutoriales %}
+                {% for autor in autores %}
                     <div class="row" style="justify-content: space-between;">
                         <div style="align-self: flex-start;">
-                            <p>{{tut.id}} {{tut.titulo}} {{tut.autor}} {{tut.creado}}</p>
+                            <p>{{autor.id}} {{autor.nombre}} {{autor.apellido}} {{autor.celular}} {{autor.email}}</p>
                         </div>
                         <div class="row">
-                            <a href="{% url 'mydb:editar' tut.id %}"><i class="fas fa-pencil-alt"></i></a>
-                            <a href="{% url 'mydb:delete' tut.id %}"><i style="color: red;" class="fas fa-trash"></i></a>
+                            <a href="{% url 'mydb:aeditar' autor.id %}"><i class="fas fa-pencil-alt"></i></a>
+                            <a href="{% url 'mydb:adelete' autor.id %}"><i style="color: red;" class="fas fa-trash"></i></a>
                         </div>
                     </div>
                     <hr>
@@ -39,7 +39,7 @@
 
 {% endblock %}
 {% block form %}
-    <h2>Registrar un tutorial</h2>
+    <h2>Registrar un Autor</h2>
 
     <form class="registrar" method="POST">{% csrf_token %}
         {{ formulario.as_p }}

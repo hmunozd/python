@@ -1,27 +1,38 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"
+        integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous" />
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
+
 <body>
     <header>
         <h1>Hello my Brother!!</h1>
+        <div class="nav">
+            <button>
+                <a class="link-boton" href="{% url 'mydb:irindex' %}"><i class="fas fa-home"></i> Turoriales</a>
+            </button>
+            <button>
+                <a class="link-boton" href="{% url 'mydb:iraindex' %}"><i class="fab fa-adn"></i> Autores</a>
+            </button>
+        </div>
     </header>
     <main>
         <div class="content">
             {% block content %}
-                
+
             {% endblock %}
         </div>
         <aside>
-            <h2>Registrar un tutorial</h2>
             {% block form %}
-                
+
             {% endblock %}
         </aside>
     </main>
@@ -30,4 +41,5 @@
     </footer>
     <script src="{% static 'js/main.js' %}"></script>
 </body>
+
 </html>

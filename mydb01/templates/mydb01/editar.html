@@ -1,0 +1,65 @@
+{% extends 'mydb01/base.html' %}
+{% block title %} Editar Turotiales {% endblock %}
+{% block content %}
+    <div>
+        <div class="close">x</div>
+        {% if enviado %}
+            <div class="resultado">
+                <p>Datos enviados</p>
+            </div>
+            <div class="resultado">
+                <p>Titulo: {{tutorial.titulo}}</p>
+                <p>Autor: {{tutorial.autor}}</p>
+                <p>Creado: {{tutorial.creado}}</p>
+                <p>Id: {{tutorial.id}}</p>
+            </div>
+            <button type="button" class="">
+                <a class="link-boton" href="{% url 'mydb:irindex' %}">Continuar</a>
+            </button>
+        {% endif %}
+    </div>
+    <p>{{h}}</p>
+    {% if not enviado %}
+        <button type="button">
+            <a class="link-boton" href="{% url 'mydb:irindex' %}">Cancelar</a>
+        </button>
+    {% endif %}
+{% endblock %}
+{% block form %}
+    {% if not enviado %}
+        <div>
+            <div class="close">x</div>
+            {% if db.error %}
+            <div class="error">
+                <p>{{db.mensaje}}</p>
+            </div>
+            {% else %}
+            <div class="result">
+                <p>{{db.mensaje}}</p>
+            </div>
+            {% endif %}
+        </div>
+        <h2>Editar un tutorial</h2>
+
+        <form class="registrar" action="." method="POST">{% csrf_token %}
+            {{ formulario.as_p }}
+            <input type="submit" value="Editar">
+        </form>
+    {% endif %}
+
+    <div>
+        {% if click %}
+        <div class="close">x</div>
+            {% if enviado %}
+                <div class="result">
+                    <p>Se ingreso el registro correctamente</p>
+                </div>
+            {% else %}
+                <div class="error">
+                    <p>Error al ingresar</p>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+
+{% endblock %}
