@@ -30,8 +30,9 @@ class TutorialDao(Dao):
                 "CREATE TABLE IF NOT EXISTS tutoriales("
                 + "ID INT AUTO_INCREMENT PRIMARY KEY,"
                 + "TITULO VARCHAR(100) NOT NULL,"
-                + "AUTOR VARCHAR(40) NOT NULL,"
-                + "CREADO DATE)"
+                + "AUTORID INT NOT NULL,"
+                + "CREADO DATE,"
+                + "FOREIGN KEY (AUTORID) REFERENCES autores(id))"
             )
             self.db.mensaje = "Tabla tutoriales creada con exito en la base de datos"
             self.db.error = False
@@ -65,7 +66,7 @@ class TutorialDao(Dao):
             sqlInsert = "SELECT * FROM tutoriales WHERE id = %s"
             self.cur.execute(sqlInsert, (numero,))
             resultado = self.cur.fetchall()
-            id, titulo, autor, creado = resultado[0]
+            id, titulo, creado, autor = resultado[0]
             tutorial = Tutorial(titulo, autor, creado)
             tutorial.id = id
             self.db.mensaje = f"Registro consultado correctamente, EXITOSO: {resultado[0]}"
@@ -79,7 +80,7 @@ class TutorialDao(Dao):
 
     def setUpdate(self, reg:object):
         try:
-            sqlInsert = "UPDATE tutoriales SET titulo=%s, autor=%s, creado=%s WHERE id= %s"
+            sqlInsert = "UPDATE tutoriales SET titulo=%s, autorid=%s, creado=%s WHERE id= %s"
             tutorial = (reg.titulo, reg.autor, reg.creado, reg.id)
             self.cur.execute(sqlInsert, tutorial)
             self.db.con.commit()
@@ -102,7 +103,7 @@ class TutorialDao(Dao):
 
     def setCreate(self, reg:object):
         try:
-            sqlInsert = "INSERT INTO tutoriales (titulo, autor, creado) VALUES (%s, %s, %s)"
+            sqlInsert = "INSERT INTO tutoriales (titulo, autorid, creado) VALUES (%s, %s, %s)"
             tutorial = (reg.titulo, reg.autor, reg.creado)
             self.cur.execute(sqlInsert, tutorial)
             self.db.con.commit()

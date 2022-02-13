@@ -1,5 +1,7 @@
 from __future__ import annotations
+
 from .database import Conexion, Dao
+from mydb01.extras.tutoriales import Tutorial
 
 class Autores:
 
@@ -112,3 +114,26 @@ class AutoresDao(Dao):
         except Exception as ex:
             self.db.mensaje = f"Falló al insertar los valores: {autor}"
             self.db.error = True
+
+    def mis_tutoriales(self, numero:int):
+        try:
+            sqlInsert = '''SELECT tutoriales.id AS id,
+            tutoriales.titulo AS titulo,
+            tutoriales.creado as creado
+            FROM tutoriales
+            INNER JOIN autores ON tutoriales.autorid = autores.id AND autores.id = %s'''
+            self.cur.execute(sqlInsert, (numero,))
+            resultado = self.cur.fetchall()
+            pre = []
+            for reg in resultado:
+                tutorial = Tutorial(reg[1], numero, reg[2])
+                tutorial.id = reg[0]
+                pre.append(tutorial)
+            self.db.mensaje = f"INNER JOIN autores ON tutoriales, EXITOSO"
+            self.db.error = False
+            print(resultado[0])
+            return pre
+        except Exception as ex:
+            self.db.mensaje = f"Falló el INNER: FALLÓ. {ex}"
+            self.db.error = True
+            return 'FALLO'

@@ -1,0 +1,45 @@
+{% extends 'mydb01/base.html' %}
+{% block title %} Tutoriales por autor {% endblock %}
+{% block content %}
+    <div>
+        <div class="close">x</div>
+        {% if db.error %}
+            <div class="error">
+                <p>{{db.mensaje}}</p>
+            </div>
+        {% else %}
+            <div class="result">
+                <p>Tutoriales obtenidos con Exito</p>
+            </div>
+        {% endif %}
+    </div>
+    <div>
+        {% if tutoriales %}
+            <div class="row" style="justify-content: space-between;">
+                <div style="align-self: flex-start;">
+                    <p>El autor {{autor.id}} {{autor.nombre}} Tiene estos tutoriales</p>
+                </div>
+            </div>
+            <div style="padding-inline: 5px;">
+                {% for tut in tutoriales %}
+                    <div class="row" style="justify-content: space-between;">
+                        <div style="align-self: flex-start;">
+                            <p>{{tut.id}} {{tut.titulo}} {{tut.creado}}</p>
+                        </div>
+                    </div>
+                    <hr>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="error">
+                No hay registros en la tabla
+            </p> 
+        {% endif %}
+    </div>
+    <p>{{h}}</p>
+
+    <button type="button">
+        <a class="link-boton" href="{% url 'mydb:iraindex' %}">Volver</a>
+    </button>
+
+{% endblock %}

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from . import views, view
+from . import views, view, viewa
 
 app_name = 'mydb'
 
@@ -15,4 +15,5 @@ urlpatterns = [
     path('aeditar/<int:record_id>', view.update_autores, name='aeditar'),
     path('aeditar/', view.update_autores2, name='aeditar'),
     path('adelete/<int:record_id>', view.delete_autores, name='adelete'),
+    path('mistutoriales/<int:record_id>', viewa.mis_tutoriales, name='mistutoriales'),
 ]
