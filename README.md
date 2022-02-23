@@ -2,4 +2,4 @@
 
 # Db mysql
 
-Crud python
+Crud python and FK
